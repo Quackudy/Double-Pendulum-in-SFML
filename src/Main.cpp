@@ -4,8 +4,8 @@ class pendulum {
 private:
 
     double strength;
-    double mass1{ 1 };
-    double mass2{ 1 };
+    double mass1;
+    double mass2;
     double accel1{ 0 };
     double accel2{ 0 };
     double vel1{ 0 };
@@ -30,7 +30,7 @@ public:
     pendulum(double str, double posf, double poss, double len1, double len2, float ori1, float ori2)
         : strength(str), pos1(posf), pos2(poss), length1(len1), length2(len2) {
         origin = { ori1, ori2 };
-        mass1 = 10; // Assign mass values
+        mass1 = 10;
         mass2 = 10;
         normalize = 2 * mass1 + mass2 - mass2 * cos(2 * pos1 - 2 * pos2);
         center = { 20, 20 };
@@ -163,7 +163,7 @@ int main()
     sf::RenderWindow window(sf::VideoMode(1600, 1000), "quackudy");
     window.setFramerateLimit(60);
 
-    pendulum pendulum(0.5, 1.5, 3, 200, 150, 800, 500);
+    pendulum pendulum(0.5, 0.8, 1, 200, 150, 800, 500);
 
     while (window.isOpen()) {
         sf::Event event;
@@ -174,9 +174,9 @@ int main()
 
         window.clear(sf::Color::White);
 
-        pendulum.updateRK4(); // Update using RK4
-        pendulum.update();    // Update positions
-        pendulum.render(window); // Render pendulum
+        pendulum.updateRK4();
+        pendulum.update();
+        pendulum.render(window);
 
         window.display();
     }
